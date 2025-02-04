@@ -106,7 +106,7 @@ export default function Home() {
           e.preventDefault()
           handleSubmitQuestion(inputMessage)
         }} >
-          <input type="search" name="serch" placeholder="Question" id="input-value" className="bg-white h-10 px-5 w-9/12 text-black pr-10 rounded-full text-sm focus:outline-none" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} ></input>
+          <input type="search" autoComplete='off' name="serch" placeholder="Question" id="input-value" className="bg-white h-10 px-5 w-9/12 text-black pr-10 rounded-full text-sm focus:outline-none" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} ></input>
           <button disabled={isLoading} className="bg-white rounded-full py-2 px-5" type="submit" >
             {isLoading ? <Image src={loadBtn} alt="send" className="w-5 h-5" /> : <Image src={send} alt="send" className="w-5 h-5" />}
           </button>
