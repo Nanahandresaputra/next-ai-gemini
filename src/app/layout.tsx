@@ -31,14 +31,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <section className="grid grid-cols-7">
+        {/* <section className="grid grid-cols-7">
           <div className="w-full border-r-gray-600 border-r-2 rounded-r-3xl h-screen flex flex-col justify-between py-14  col-span-1">
             <p className="text-center font-semibold " >Biass AI</p>
-            <Image src={robot} alt="astronaut" className="h-96 w-44 object-cover animate-ping " />
+            <Image src={robot} alt="astronaut" className="h-96 w-44 object-cover animate-pulse " />
             <p className="text-center italic " >powered by gemini api</p>
           </div>
           {children}
-        </section>
+        </section> */}
+        {children}
       </body>
     </html>
   );
