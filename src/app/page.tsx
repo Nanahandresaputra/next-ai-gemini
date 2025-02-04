@@ -13,7 +13,6 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function Home() {
 
-  /* eslint-disable  @typescript-eslint/no-explicit-any */
   const [historyChat, setHistoryChat]: any[] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
