@@ -74,7 +74,7 @@ export default function Home() {
           <div ref={messagesEndRef} className="pt-4 mt-[30vh]" />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center items-center w-full relative">
+        <div className="flex flex-col items-center justify-center w-full relative">
           <div className="h-[30rem] w-[30rem] bg-purple-600 blur-3xl rounded-full opacity-35" />
           <Image src={astrounaut} alt="astronaut" className="absolute h-40 w-40 animate-bounce " />
           <TypeAnimation
