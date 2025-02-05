@@ -20,20 +20,22 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
 
   const messagesEndRef = useRef<any>(null);
+  const bottomRef = useRef<any>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  const scrollToBottom = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" })
   }
 
 
   const handleSubmitQuestion = (question: string) => {
+    scrollToBottom(bottomRef);
     if (question.toLocaleLowerCase().includes('siapa nana')) {
       setHistoryChat([...historyChat, {
         question,
         answer: 'Nana Handre Saputra adalah seorang yang paling kece badai abad ini, ketampanan dan kharisma nya yang sangat luar biasa mantapp menjadikan dia termasuk kedalam deretan orang-orang kece 2025 di dunia. Anjaaayyy!!!'
       }])
       setInputMessage('');
-      scrollToBottom();
+      scrollToBottom(messagesEndRef);
     } else {
       setIsLoading(true);
 
@@ -59,7 +61,7 @@ export default function Home() {
           answer: res.candidates[0].content.parts[0].text
         }])
       }).catch(() => { }).finally(() => {
-        scrollToBottom();
+        scrollToBottom(messagesEndRef);
         setIsLoading(false)
       });
     }
@@ -78,7 +80,7 @@ export default function Home() {
             <div className="absolute z-10 top-0 w-screen h-[20vh] md:w-10/12 md:h-[25vh] lg:h-[35vh] rounded-b-full bg-purple-500 opacity-30 blur-3xl" />
           </div>
 
-          <div className="mb-[18vh] md:mb-[24vh] lg:mb-[30vh] relative z-50 ">
+          <div className="mb-[18vh] md:mb-[24vh] lg:mb-[30vh] relative z-30 ">
             {historyChat.map((data, index) => (
               <div className="space-y-2 mt-2" key={index} >
                 <div className="flex justify-end">
@@ -91,7 +93,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div ref={messagesEndRef} className="" />
+          <div ref={messagesEndRef} />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center w-full relative">
@@ -114,7 +116,7 @@ export default function Home() {
       )
       }
 
-      <div className="fixed bottom-12 w-full space-y-3">
+      <div className="fixed bottom-12 w-full z-50 space-y-3 bg-[#0a0a0a]">
 
         {isLoading && (
           <div className="flex justify-center items-center space-y-1 w-10/12 bg-[#0a0a0a]  ">
@@ -123,7 +125,7 @@ export default function Home() {
           </div>
         )}
 
-        <form className="flex md:justify-center items-center space-x-2 md:space-x-4 w-full" onSubmit={(e) => {
+        <form className="flex md:justify-center items-center space-x-2 md:space-x-4 w-full" ref={bottomRef} onSubmit={(e) => {
           e.preventDefault()
           handleSubmitQuestion(inputMessage)
         }} >
