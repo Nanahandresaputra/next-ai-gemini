@@ -8,6 +8,8 @@ import send from '../assets/send.svg';
 import load from '../assets/loading.gif';
 import loadBtn from '../assets/loading-btn.gif';
 import { TypeAnimation } from "react-type-animation";
+import Markdown from 'markdown-to-jsx'
+
 
 
 
@@ -64,27 +66,37 @@ export default function Home() {
   }
 
 
+
+
   return (
-    <section className="py-8 px-5 lg:px-12 relative">
+    <section className="py-8 px-5 lg:px-12 relative max-w-[100vw] overflow-hidden">
 
       {historyChat.length > 0 ? (
         <div className="max-h-[78vh] md:max-h-[85vh] overflow-y-auto lg:pt-10 rounded-lg " id="chat" >
-          {historyChat.map((data, index) => (
-            <div className="space-y-2 mt-2" key={index} >
-              <div className="flex justify-end">
-                <p className="bg-purple-600 rounded-lg p-3 text-white text-right max-w-[17rem] md:max-w-[30rem] lg:max-w-[50rem]">{`${data.question}`}</p>
+
+          <div className="flex justify-center w-full rounded-b-full">
+            <div className="absolute z-10 top-0 w-screen h-[20vh] md:w-10/12 md:h-[25vh] lg:h-[35vh] rounded-b-full bg-purple-500 opacity-30 blur-3xl" />
+          </div>
+
+          <div className="mb-[18vh] md:mb-[24vh] lg:mb-[30vh] relative z-50 ">
+            {historyChat.map((data, index) => (
+              <div className="space-y-2 mt-2" key={index} >
+                <div className="flex justify-end">
+                  <p className="bg-purple-600 rounded-lg p-3 text-white text-xs md:text-sm max-w-[22rem] md:max-w-[30rem] lg:max-w-[50rem]">{`${data.question}`}</p>
+                </div>
+                <div className="flex justify-start" style={{ wordBreak: "break-word", whiteSpace: "pre-wrap" }}>
+                  {/* <p className="bg-gray-500 rounded-lg p-3 text-white max-w-[17rem] md:max-w-[30rem] lg:max-w-[50rem]" >{`${data.answer}`}</p> */}
+                  <Markdown className="bg-gray-700 rounded-lg p-3 text-white text-xs md:text-sm max-w-[22rem] md:max-w-[30rem] lg:max-w-[50rem] overflow-auto" >{data.answer}</Markdown>
+                </div>
               </div>
-              <div className="flex justify-start">
-                <p className="bg-gray-500 rounded-lg p-3 text-white text-start max-w-[17rem] md:max-w-[30rem] lg:max-w-[50rem]">{`${data.answer}`}</p>
-              </div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} className="pt-4 mt-[18vh] md:mt-[24vh] lg:mt-[30vh]" />
+            ))}
+          </div>
+          <div ref={messagesEndRef} className="" />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center w-full relative">
           <div className="h-[20rem] w-[30rem] lg:h-[30rem] lg:w-[30rem] bg-purple-600 blur-3xl rounded-full opacity-35" />
-          <Image src={astrounaut} alt="astronaut" className="absolute h-40 w-40 animate-bounce " />
+          <Image src={astrounaut} alt="astronaut" className="absolute w-32 h-32 md:h-40 md:w-40 animate-bounce " />
           <TypeAnimation
             preRenderFirstString={true}
             sequence={[
@@ -95,7 +107,7 @@ export default function Home() {
 
             ]}
             speed={50}
-            style={{ fontSize: '2em', fontWeight: 'bold' }}
+            style={{ fontSize: '2vmax', fontWeight: 'bold' }}
             repeat={Infinity}
           />
         </div>

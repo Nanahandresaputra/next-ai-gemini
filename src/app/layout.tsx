@@ -30,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+
       >
         {/* <section className="grid grid-cols-7">
           <div className="w-full border-r-gray-600 border-r-2 rounded-r-3xl h-screen flex flex-col justify-between py-14  col-span-1">
