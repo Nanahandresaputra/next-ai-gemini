@@ -47,7 +47,7 @@ export default function Home() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          contents: [{
+          contents: historyChat.length > 0 ? [...historyChat.map((data) => ([{ role: 'user', parts: [{ text: data.question }] }, { role: 'model', parts: [{ text: data.answer }] }])).flatMap(data => [...data]), { role: 'user', parts: [{ text: question }] }] : [{
             parts: [{
               text: question
             }]
@@ -70,14 +70,16 @@ export default function Home() {
 
 
 
+
+
   return (
-    <section className="py-8 px-5 lg:px-12 relative max-w-[100vw] overflow-hidden">
+    <section className="py-8 relative max-w-[100vw] overflow-hidden">
 
       {historyChat.length > 0 ? (
-        <div className="max-h-[78vh] md:max-h-[85vh] overflow-y-auto lg:pt-10 rounded-lg " id="chat" >
+        <div className=" px-5 lg:px-12 max-h-[78vh] md:max-h-[85vh] overflow-y-auto lg:pt-10 rounded-lg " id="chat" >
 
           <div className="flex justify-center w-full rounded-b-full">
-            <div className="absolute z-10 top-0 w-screen h-[20vh] md:w-10/12 md:h-[25vh] lg:h-[35vh] rounded-b-full bg-purple-500 opacity-30 blur-3xl" />
+            <div className="absolute z-10 top-0 w-screen h-[40vh] lg:w-10/12 md:h-[50vh] lg:h-[60vh] rounded-b-full bg-gradient-to-b from-purple-600 to-[#0a0a0a] opacity-30 blur-3xl" />
           </div>
 
           <div className="mb-[18vh] md:mb-[24vh] lg:mb-[30vh] relative z-30 ">
@@ -96,8 +98,8 @@ export default function Home() {
           <div ref={messagesEndRef} />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center w-full relative">
-          <div className="h-[20rem] w-[30rem] lg:h-[30rem] lg:w-[30rem] bg-purple-600 blur-3xl rounded-full opacity-35" />
+        <div className="pb-5 px-5 lg:px-12 flex flex-col items-center justify-center w-full relative">
+          <div className="h-[20rem] w-[30rem] lg:h-[30rem] lg:w-[30rem] bg-gradient-to-b from-purple-600 to-[#0a0a0a] blur-3xl rounded-full opacity-35" />
           <Image src={astrounaut} alt="astronaut" className="absolute w-32 h-32 md:h-40 md:w-40 animate-bounce " />
           <TypeAnimation
             preRenderFirstString={true}
@@ -116,20 +118,20 @@ export default function Home() {
       )
       }
 
-      <div className="fixed bottom-12 w-full z-50 space-y-3 bg-[#0a0a0a]">
+      <div className="fixed bottom-0 pb-12 flex flex-col items-center w-screen z-50 space-y-3 bg-[#0a0a0a]">
 
         {isLoading && (
-          <div className="flex justify-center items-center space-y-1 w-10/12 bg-[#0a0a0a]  ">
+          <div className="flex justify-center items-center space-y-1 w-10/12 ">
             <Image src={load} alt="send" className="w-12 h-12" />
             <p className="animate-pulse font-semibold">Generate ...</p>
           </div>
         )}
 
-        <form className="flex md:justify-center items-center space-x-2 md:space-x-4 w-full" ref={bottomRef} onSubmit={(e) => {
+        <form className="flex w-full justify-center items-center space-x-2 md:space-x-4" ref={bottomRef} onSubmit={(e) => {
           e.preventDefault()
           handleSubmitQuestion(inputMessage)
         }} >
-          <input type="search" autoComplete='off' name="serch" placeholder="Question" id="input-value" className="bg-white h-10 px-5 w-9/12 md:w-7/12 text-black pr-10 rounded-full text-sm focus:outline-none" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} ></input>
+          <input autoComplete='off' name="serch" placeholder="Question" id="input-value" className="bg-white h-10 px-5 w-9/12 md:w-7/12 text-black pr-10 rounded-full text-sm focus:outline-none" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} ></input>
           <button disabled={isLoading} className="bg-white rounded-full py-2 px-3 md:px-5" type="submit" >
             {isLoading ? <Image src={loadBtn} alt="send" className="w-5 h-5" /> : <Image src={send} alt="send" className="w-5 h-5" />}
           </button>
