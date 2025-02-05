@@ -118,7 +118,7 @@ export default function Home() {
       )
       }
 
-      <div className="fixed bottom-0 pb-12 flex flex-col items-center w-screen z-50 space-y-3 bg-[#0a0a0a]">
+      <div className="fixed bottom-0 pt-2 pb-8 flex flex-col items-center w-screen z-50 space-y-3 bg-[#0a0a0a]">
 
         {isLoading && (
           <div className="flex justify-center items-center space-y-1 w-10/12 ">
